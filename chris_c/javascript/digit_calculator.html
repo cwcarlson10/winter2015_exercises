@@ -1,7 +1,33 @@
 <html>
 <head>
-  <script src="jquery-1.11.2.min.js"></script>
-  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+  <style type="text/css">
+    .panel {
+      display: inline-table;
+      background-color: lightgreen;
+    }
+    .btn {
+      width: 34px;
+      height: 34px;
+      margin: 2px;
+    }
+    #result_button {
+      width: 100%;
+    }
+    .container {
+      display: flex;
+      margin-top: 29px;
+    }
+    #calculator_form {
+      margin-bottom: 2px;
+    }
+    table {
+      margin-top: 5px;
+    }
+  </style>
+
   <script>
     $(document).ready(function(){
       var $display = $('#calculator_form input[name=display_textfield]');
@@ -14,12 +40,12 @@
           $display.val('');
         }
         var digit_value = this.value;
-        var previous_display_value = $display[0].value; // Getting a selection like an array or with get(number) returns the DOM element 
+        var previous_display_value = $display[0].value; // Getting a selection like an array or with get(number) returns the DOM element
         $display.val(previous_display_value + digit_value);
       });
 
       $('#calculator_form input[name=operator_button]').click(function(){
-        $operator.val(this.value); 
+        $operator.val(this.value);
         $first_operand.val($display.val());
         $display.val(this.value); // Erase the display
       });
@@ -27,7 +53,7 @@
       $('#result_button').click(function(){
         var $second_operand = $display;
 
-        var result;   
+        var result;
 
         switch($operator.val()){
           case '+':
@@ -54,44 +80,49 @@
 
     });
   </script>
-</head> 
+</head>
 <body>
-  <form id='calculator_form'>
-    <input type='text' name='display_textfield' placeholder='use the keypad' disabled value=''><br/>
-    <input type='hidden' name='operand' value='' />
-    <input type='hidden' name='operator' value='' />
-    <table>
-      <tr>
-        <td><input type='button' name='digit' value='1'></td>
-        <td><input type='button' name='digit' value='2'></td>
-        <td><input type='button' name='digit' value='3'></td>
-      </tr>
-      <tr>
-        <td><input type='button' name='digit' value='4'></td>
-        <td><input type='button' name='digit' value='5'></td>
-        <td><input type='button' name='digit' value='6'></td>
-      </tr>
-      <tr>
-        <td><input type='button' name='digit' value='7'></td>
-        <td><input type='button' name='digit' value='8'></td>
-        <td><input type='button' name='digit' value='9'></td>
-      </tr>
-      <tr>
-        <td><input type='button' name='digit' value='.'></td>
-        <td><input type='button' name='digit' value='0'></td>
-        <td><input type='button' id='result_button' name='result' value='='></td>
-      </tr>
-    </table>
-
-    Operators
-    <ul class='oprators'>
-      <li><input type='button' name='operator_button' value='+' /></li>
-      <li><input type='button' name='operator_button' value='-' /></li>
-      <li><input type='button' name='operator_button' value='/' /></li>
-      <li><input type='button' name='operator_button' value='*' /></li>
-      <li><input type='button' id='clear_button' name='clear_button' value='clear' /></li>
-    </ul>
-    
-  </form>
+  <div class='container'>
+    <div class='panel panel-default center-block'>
+      <form id='calculator_form'>
+        <input type='text' name='display_textfield' placeholder='use the keypad' disabled value='' class="text-center"><br/>
+        <input type='hidden' name='operand' value='' />
+        <input type='hidden' name='operator' value='' />
+        <div>
+          <table class="center-block">
+            <tr>
+              <td><input type='button' name='digit' value='1' class="btn btn-warning active" aria-pressed="true"></td>
+              <td><input type='button' name='digit' value='2' class="btn btn-warning active" aria-pressed="true"></td>
+              <td><input type='button' name='digit' value='3' class="btn btn-warning active" aria-pressed="true"></td>
+              <td><input type='button' name='operator_button' value='+' class="btn btn-info"/></td>
+            </tr>
+            <tr>
+              <td><input type='button' name='digit' value='4' class="btn btn-warning active" aria-pressed="true"></td>
+              <td><input type='button' name='digit' value='5' class="btn btn-warning active" aria-pressed="true"></td>
+              <td><input type='button' name='digit' value='6' class="btn btn-warning active" aria-pressed="true"></td>
+              <td><input type='button' name='operator_button' value='-' class="btn btn-info" /></td>
+            </tr>
+            <tr>
+              <td><input type='button' name='digit' value='7' class="btn btn-warning active" aria-pressed="true"></td>
+              <td><input type='button' name='digit' value='8' class="btn btn-warning active" aria-pressed="true"></td>
+              <td><input type='button' name='digit' value='9' class="btn btn-warning active" aria-pressed="true"></td>
+              <td><input type='button' name='operator_button' value='/' class="btn btn-info" /></td>
+            </tr>
+            <tr>
+              <td><input type='button' name='digit' value='.' class="btn btn-warning active" aria-pressed="true"></td>
+              <td><input type='button' name='digit' value='0' class="btn btn-warning active" aria-pressed="true"></td>
+              <td><input type='button' id='clear_button' name='clear_button' value='C' class="btn btn-info"/></td>
+              <td><input type='button' name='operator_button' value='*' class="btn btn-info" /></td>
+            </tr>
+            <tr>
+              <td colspan="4">
+                <input type='button' id='result_button' name='result' value='=' class="btn btn-success" data-toggle="button" aria-pressed="false" autocomplete="off">
+              </td>
+            </tr>
+          </table>
+        </div>
+      </form>
+    </div>
+  </div>
 </body>
 </html>
